@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-agent
+  namespace: grafana
+data:
+  config.river: |
+    logging {
+        level  = "info"
+        format = "logfmt"
+    }
+  agent.yaml: |
+    metrics:
+      wal_directory: /tmp/wal
+      global:
+        remote_write:
+          - url: http://localhost:9009/api/prom/push
